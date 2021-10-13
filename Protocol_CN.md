@@ -2,7 +2,7 @@
 
 此文档解释了esn网络协议的细节,面向API开发者。  
 阅读此文档前,请先了解esn系统的用户级基本信息。  
-详见:https://github.com/EasyNotification/esn-daemon/blob/master/README_CN.md
+详见:[此文档](https://github.com/EasyNotification/esn-daemon/blob/master/README_CN.md)
 
 ## NetPackage 通信包
 
@@ -50,18 +50,24 @@
 **一个标准的无异常的结果信息:**
 ```JSON
 {
-    "Result":"Done",//字符串"Done"
-    "Error":"",//空字符串
-    "Token":"98965e5647d81efd0df0c691119989df"//与请求数据包的Token一致
+    //字符串"Done"
+    "Result":"Done",
+    //空字符串
+    "Error":"",
+    //与请求数据包的Token一致
+    "Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
 
 **一个包含异常信息的结果信息:**
 ```JSON
 {
-    "Result":"",//空字符串
-    "Error":"SampleErrorMessage",//异常的详细信息
-    "Token":"98965e5647d81efd0df0c691119989df"//与请求数据包的Token一致
+    //空字符串
+    "Result":"",
+    //异常的详细信息
+    "Error":"SampleErrorMessage",
+    //与请求数据包的Token一致
+    "Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
 建议:API在收到包含异常的结果信息时应抛出语言级异常。  
@@ -69,9 +75,12 @@
 **一个包含`JSON语法错误`信息的结果信息:**
 ```JSON
 {
-    "Result":"",//空字符串
-    "Error":"JSON syntax err",//JSON语法错误说明
-    "Token":"ErrorPackage"//错误信息包
+    //空字符串
+    "Result":"",
+    //JSON语法错误说明
+    "Error":"JSON syntax err",
+    //错误信息包
+    "Token":"ErrorPackage"
 }
 ```
 注意:服务端在发送一个`JSON语法错误`信息包之后会立即关闭此连接。
@@ -82,9 +91,12 @@
 
 ```JSON
 {
-    "Integer":1,//任意整型数据
-    "Msg":"Hello esnd!",//任意字符串数据
-    "Token":"98965e5647d81efd0df0c691119989df"//任意唯一字符串,建议使用MD5算法获取某随机字符串的MD5密文
+    //任意整型数据
+    "Integer":1,
+    //任意字符串数据
+    "Msg":"Hello esnd!",
+    //任意唯一字符串,建议使用MD5算法获取某随机字符串的MD5密文
+    "Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
 
@@ -94,8 +106,10 @@
 
 ```JSON
 {
-    "Result":"Done",//字符串"Done"
-    "Error":"",//空字符串
+    //字符串"Done"
+    "Result":"Done",
+    //空字符串
+    "Error":"",
 }
 ```
 
@@ -105,8 +119,10 @@
 
 ```JSON
 {
-    "User":"root",//用户名称
-    "Pass":"changeMe",//该账户的密码
+    //用户名称
+    "User":"root",
+    //该账户的密码
+    "Pass":"changeMe",
     "Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
@@ -135,10 +151,14 @@
 
 ```JSON
 {
-    "Target":"root",//目标用户,设置为"_global_"以向全局发送,若要发送给多个用户,请使用半角逗号(,)分隔
-	"Time":"2021-10-13,14:36:12",//必须按照此格式设置时间:"yyyy-MM-dd,HH:mm:ss"
-	"Title":"Test",//通知标题
-	"Content":"Hello root!",//通知内容
+    //目标用户,设置为"_global_"以向全局发送,若要发送给多个用户,请使用半角逗号(,)分隔
+    "Target":"root",
+    //必须按照此格式设置时间:"yyyy-MM-dd,HH:mm:ss"
+	"Time":"2021-10-13,14:36:12",
+    //通知标题
+	"Title":"Test",
+    //通知内容
+	"Content":"Hello root!",
 	"Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
@@ -178,9 +198,12 @@
 
 ```JSON
 {
-    "From":0,//从此数字的ID开始
-    "To":50,//到此数字的ID结束
-    "Limit":40,//最大发送此数字条通知,若ID From-To中有大于Limit条发送至该用户的通知,将只返回前Limit条
+    //从此数字的ID开始
+    "From":0,
+    //到此数字的ID结束
+    "To":50,
+    //最大发送此数字条通知,若ID From-To中有大于Limit条发送至该用户的通知,将只返回前Limit条
+    "Limit":40,
     "Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
@@ -217,13 +240,20 @@ From和To限制了查找通知的ID范围,Limit限制了最大发送通知量。
 
 ```JSON
 {
-    "Id":3,//通知唯一ID
-    "Target":"root,Bob",//目标用户列表
-    "Time":"2021-10-13,10:12:02",//被推送的时间
-    "Title":"TestTitle",//通知标题
-    "Content":"Hello client!",//通知内容
-    "Source":"Alice",//来源,由服务端自动设置
-    "Token":"98965e5647d81efd0df0c691119989df"//若此通知是非实时的由本客户端请求拉取的,Token将与PackRequest包的Token一致。若此通知是实时的由另外一个客户端推送给该客户端的,此Token将与另外一个客户端推送请求的Token一致
+    //通知唯一ID
+    "Id":3,
+    //目标用户列表
+    "Target":"root,Bob",
+    //被推送的时间
+    "Time":"2021-10-13,10:12:02",
+    //通知标题
+    "Title":"TestTitle",
+    //通知内容
+    "Content":"Hello client!",
+    //来源,由服务端自动设置
+    "Source":"Alice",
+    //若此通知是非实时的由本客户端请求拉取的,Token将与PackRequest包的Token一致。若此通知是实时的由另外一个客户端推送给该客户端的,此Token将与另外一个客户端推送请求的Token一致
+    "Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
 
@@ -238,7 +268,8 @@ From和To限制了查找通知的ID范围,Limit限制了最大发送通知量。
 **由客户端发送包含以下信息的数据包:**
 ```JSON
 {
-    "Priv":"",//空字符串
+    //空字符串
+    "Priv":"",
     "Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
@@ -247,8 +278,10 @@ From和To限制了查找通知的ID范围,Limit限制了最大发送通知量。
 
 ```JSON
 {
-    "Priv":"push pull account",//该账户所具有的权限由空格分开
-    "Token":"98965e5647d81efd0df0c691119989df-1"//Token为请求包的Token+"-1"
+    //该账户所具有的权限由空格分开
+    "Priv":"push pull account",
+    //Token为请求包的Token+"-1"
+    "Token":"98965e5647d81efd0df0c691119989df-1"
 }
 ```
 
@@ -272,11 +305,16 @@ From和To限制了查找通知的ID范围,Limit限制了最大发送通知量。
 **添加账户**
 ```JSON
 {
-    "Oper":"add",//指定add操作
-    "Name":"Alice",//新账户名
-    "Pass":"alivePassword",//新账户的密码
-    "Priv":"push pull account",//新账户的权限(push,pull,account以空格分隔)
-    "Kick":"false",//不重要字段,填false或true
+    //指定add操作
+    "Oper":"add",
+    //新账户名
+    "Name":"Alice",
+    //新账户的密码
+    "Pass":"alivePassword",
+    //新账户的权限(push,pull,account以空格分隔)
+    "Priv":"push pull account",
+    //不重要字段,填false或true
+    "Kick":"false",
     "Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
@@ -284,11 +322,16 @@ From和To限制了查找通知的ID范围,Limit限制了最大发送通知量。
 **删除账户**
 ```JSON
 {
-    "Oper":"remove",//指定remove操作
-    "Name":"Alice",//要删除的账户名
-    "Pass":"",//不重要字段
-    "Priv":"",//不重要字段
-    "Kick":"true",//是否将已使用此用户身份登录的客户端下线(true或false)
+    //指定remove操作
+    "Oper":"remove",
+    //要删除的账户名
+    "Name":"Alice",
+    //不重要字段
+    "Pass":"",
+    //不重要字段
+    "Priv":"",
+    //是否将已使用此用户身份登录的客户端下线(true或false)
+    "Kick":"true",
     "Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
@@ -343,7 +386,8 @@ From和To限制了查找通知的ID范围,Limit限制了最大发送通知量。
 
 ```JSON
 {
-    "Limit":40,//指定请求的近期通知数量最大值
+    //指定请求的近期通知数量最大值
+    "Limit":40,
     "Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
@@ -375,8 +419,10 @@ From和To限制了查找通知的ID范围,Limit限制了最大发送通知量。
 
 ```JSON
 {
-    "From":0,//最小ID
-    "To":50,//最大ID,如果想统计所有范围的发送给该账户的数量,请将此值设为0
+    //最小ID
+    "From":0,
+    //最大ID,如果想统计所有范围的发送给该账户的数量,请将此值设为0
+    "To":50,
     "Token":"98965e5647d81efd0df0c691119989df"
 }
 ```
@@ -411,7 +457,9 @@ From和To限制了查找通知的ID范围,Limit限制了最大发送通知量。
 
 ```JSON
 {
-    "Amount":41,//数量统计结果
-    "Token":"98965e5647d81efd0df0c691119989df-1"//Token为请求包的Token+"-1"
+    //数量统计结果
+    "Amount":41,
+    //Token为请求包的Token+"-1"
+    "Token":"98965e5647d81efd0df0c691119989df-1"
 }
 ```
