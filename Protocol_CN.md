@@ -25,10 +25,10 @@
 以下是各数据包的列表：  
 |code|名称|发送者|字段列表|类型列表|描述|
 |:---|:---|:----|:------|:------|:---|
-|0   |PackTest|both|Integer,Msg,Token|int,string,string|测试连接|
-|1   |PackLogin|client|User,Pass,Token|string,string,string|凭用户名和密码登录|
-|2   |PackResult|server|Result,Error,Token|string,string,string|回复请求的结果|
-|3 |PackPush|client|Target,Time,Title,Content,Token|string,string,string,string,string|推送通知|
+|0|PackTest|both|Integer,Msg,Token|int,string,string|测试连接|
+|1|PackLogin|client|User,Pass,Token|string,string,string|凭用户名和密码登录|
+|2|PackResult|server|Result,Error,Token|string,string,string|回复请求的结果|
+|3|PackPush|client|Target,Time,Title,Content,Token|string,string,string,string,string|推送通知|
 |4|PackRequest|client|From,To,Limit,Token|int,int,int,string|请求指定范围的通知|
 |5|PackRespNotification|server|Id,Target,Time,Title,Content,Source,Token|int,string,string,string,string,string,string|向客户端发送一个通知|
 |6|PackReqPrivList|both|Priv,Token|string,string|请求此账户的权限列表|
