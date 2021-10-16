@@ -1,8 +1,8 @@
 # esn协议
 
-此文档解释了esn网络协议的细节,面向API开发者。  
+此文档解释了esn网络协议的细节。  
 阅读此文档前,请先了解esn系统的用户级基本信息。  
-详见:[此文档](https://github.com/EasyNotification/esn-daemon/blob/master/README_CN.md)
+详见:[ESN用户级基本信息](https://github.com/EasyNotification/esn-daemon/blob/master/README_CN.md)
 
 ## NetPackage 通信包
 
@@ -14,6 +14,21 @@
 |size|int|数据包长度|
 |crypto|int|是否加密(1:加密)|
 |dataPack|JSON|数据包内容|
+
+### 发送通信包
+1. 向对端写入数据包的编号,Integer整型数据,2字节,见下表
+2. 向对端写入数据包JSON数据的字节数Integer整型数据,2字节
+3. 向对端写入是否加密,Integer整型数据,2字节,1:加密 0:明文,目前不支持加密,请直接写入0
+4. 向对端逐字节写入数据包JSON数据,字节数必须等于第二步的数值
+
+### 接收通信包
+
+1. 从对端读取数据包的编号,Integer整型数据,2字节
+2. 从对端读取数据包JSON数据的字节数,Integer整型数据,2字节
+3. 从对端读取是否加密,目前为常数0
+4. 从对端逐字节读取数据包JSON数据,共读取的字节数由第二步所读取的整数确定
+5. 将JSON对应数据包,并进行下一步操作
+
 
 ## DataPackage 数据包
 
@@ -114,6 +129,7 @@
 ```
 
 ### PackLogin (1) 由客户端发送
+ <a name="label"></a> 
 
 以特定账户的名称和密码登录。
 
