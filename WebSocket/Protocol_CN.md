@@ -1,4 +1,4 @@
-# esn webSocket
+# esn webSocket协议
 
 基于WebSocket技术的esn通信协议  
 此文档是基于WebSocket实现的esn通信协议标准,esn-daemon将支持此协议
@@ -16,17 +16,21 @@
 |  :----- | :----- | :----- |
 |Code|int|数据包代码|
 |Crypto|int|是否加密(1:加密)|
-|DataPack|JSON|数据包内容|
+|DataPack|string|数据包内容JSON的字符串|
 
 e.g. 此通信包包含了一个编号为0的数据包(PackTest)
 ```JSON
 {
     "Code":0,
     "Crypto":0,
-    "DataPack":{
-        "Integer":1,
-        "Msg":"Hello WebSocket!",
-        "Token":"98965e5647d81efd0df0c691119989df"
-    }
+    "DataPack":"{
+        \"Integer\":1,
+        \"Msg\":\"Hello WebSocket!\",
+        \"Token\":\"98965e5647d81efd0df0c691119989df\"
+    }"
 }
 ```
+
+## DataPackage数据包
+
+与基于Socket的协议相同，查阅Socket/API_CN.md
